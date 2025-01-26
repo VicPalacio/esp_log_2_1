@@ -1,35 +1,41 @@
-| Supported Targets | ESP32 | ESP32-C2 | ESP32-C3 | ESP32-C6 | ESP32-H2 | ESP32-P4 | ESP32-S2 | ESP32-S3 |
-| ----------------- | ----- | -------- | -------- | -------- | -------- | -------- | -------- | -------- |
+# ESP32 y ESP_LOG
 
-# _Sample project_
+En este proyecto se hace una breve demostración de la librería LOG que se utiliza de la misma forma que printf pero la diferencia es que cuenta con clasificación de tipos de mensaje como informativos en color verde, advertencia en color amarillo y error en color rojo, la documentación de esta librería está disponible en el siguiente enlace:
 
-(See the README.md file in the upper level 'examples' directory for more information about examples.)
+https://docs.espressif.com/projects/esp-idf/en/latest/esp32s3/api-reference/system/log.html#logging-library
 
-This is the simplest buildable example. The example is used by command `idf.py create-project`
-that copies the project to user specified path and set it's name. For more information follow the [docs page](https://docs.espressif.com/projects/esp-idf/en/latest/api-guides/build-system.html#start-a-new-project)
+Este codigo realiza tres tareas básicas:
 
+1.  Un parpadeo sobre los pines led_A y led_B
+2.  Muestra el conteo de una variable hasta cierto valor y la presenta por la terminal usando la libreria esp_log.h
+3.  Explora algunas de las caracteristicas que ofrece la libreria esp_log.h para esto se crean las variables a y b, y se presentan usando la terminal, se muestran las variables en diferentes tipos como:
 
+- Decimal
+- Caracter
+- Float
+- String
+  Y algunas secuencias de escape como:
 
-## How to use example
-We encourage the users to use the example as a template for the new projects.
-A recommended way is to follow the instructions on a [docs page](https://docs.espressif.com/projects/esp-idf/en/latest/api-guides/build-system.html#start-a-new-project).
+| Secuencia de escape | Representa       |
+| ------------------- | ---------------- |
+| \r                  | Retorno de carro |
+| \n                  | Nueva línea      |
 
-## Example folder contents
+## Código ejemplo demostrativo:
 
-The project **sample_project** contains one source file in C language [main.c](main/main.c). The file is located in folder [main](main).
-
-ESP-IDF projects are built using CMake. The project build configuration is contained in `CMakeLists.txt`
-files that provide set of directives and instructions describing the project's source files and targets
-(executable, library, or both). 
-
-Below is short explanation of remaining files in the project folder.
+En el proyecto se mostrará una sección de código que permitirá hacer una breve demostración:
 
 ```
-├── CMakeLists.txt
-├── main
-│   ├── CMakeLists.txt
-│   └── main.c
-└── README.md                  This is the file you are currently reading
+    ESP_LOGI("config","\n\n---PRUEBAS LIBRERIA ESP-LOG---\r");
+    ESP_LOGW("config","La variable (a) como decimal: %d\r", a);
+    ESP_LOGW("config","La Variable (a) como caracter: %c\r", a);
+    ESP_LOGW("config","La Variable (a) tiene un tamano de %d byte\n",sizeof(a));
+    ESP_LOGE("config","La Variable (b) como float: %f\r", b);
+    ESP_LOGE("config","La Variable (b) tiene un tamano de %d bytes\r", sizeof(b));
+    ESP_LOGE("config","(2.55) es otro float %f\n", 2.55);
+    ESP_LOGI("config","La Variable a: %d\t y la Variable b: %f\r", a,b);
+    ESP_LOGI("config","(6.02e23) como exponente %e\r",6.02e-3);
+    ESP_LOGI("config","Victor como string \n");
 ```
-Additionally, the sample project contains Makefile and component.mk files, used for the legacy Make based build system. 
-They are not used or needed when building with CMake and idf.py.
+
+## Fin
