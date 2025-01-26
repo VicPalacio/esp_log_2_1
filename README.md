@@ -1,4 +1,4 @@
-# ESP32 y ESP_LOG :tw-1f191:
+# ESP32 y ESP_LOG :
 
 En este proyecto se hace una breve demostración de la librería LOG que se utiliza de la misma forma que printf pero la diferencia es que cuenta con clasificación de tipos de mensaje como informativos en color verde, advertencia en color amarillo y error en color rojo, la documentación de esta librería está disponible en el siguiente enlace:
 
